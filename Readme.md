@@ -1,0 +1,1 @@
+[ENLACE APUNTES](http://ioc.xtec.cat/materials/FP/Materials/2252_DAM/DAM_2252_M09/web/html/WebContent/u2/a1/continguts.html)
