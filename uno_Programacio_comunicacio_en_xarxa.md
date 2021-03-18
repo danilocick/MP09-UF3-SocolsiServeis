@@ -115,7 +115,12 @@ les dades a enviar.
 Per tal d’assegurar la fiabilitat de les dades, el protocol estableix 
 que per cada segment enviat des d’un o altre dispositiu, el receptor 
 contestarà amb un senyal especial de reconeixement que indiqui a l’emissor 
-que les dades del segment han arribat amb èxit. 
+que les dades del segment han arribat amb èxit.
+[Esquema del TCP](Images/DataTCP.png)
+
+//TODO: CONTROL+F
+La capa de xarxa fa servir el protocol IP per aconseguir connectar dos dispositius
+
 
 
 
