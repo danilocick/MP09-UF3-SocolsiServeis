@@ -118,9 +118,44 @@ contestarà amb un senyal especial de reconeixement que indiqui a l’emissor
 que les dades del segment han arribat amb èxit.
 [Esquema del TCP](Images/DataTCP.png)
 
-//TODO: CONTROL+F
-La capa de xarxa fa servir el protocol IP per aconseguir connectar dos dispositius
+##### Adreça IP
+>**Adreces IP** identifiquen les connexions directes d'un dispositiu de manera única.
+> Un dispositiu pot tenir diferents connexions.
 
+Interfícies de xarxa lòguiques: és una emulació de les IPs, *Ex: un Sistema 
+Operatiu té l'adreça 127.0.0.1 per identificar el dispositiu propi.*
 
+##### Col·laboració entre nodes
+Els nodes col·laboren entre ells creant petits mapes a la xarxa per tal 
+de poder decidir cap on adreçar els paquets que arriben des de diferents 
+orígens a través de les seves interfícies de xarxa.
+L'objectiu es segmentar la xarxa i crear mapes específics per a cada node 
+per establir un conjunt de regles senzilles per al bon funcionament de fer 
+arribar un paquet al seu destí.
 
+##### Adreces i mascares
+>Una màscara és una seqüència de bits de la mateixa mida que una adreça IP, 
+> però organitzada de manera peculiar. Hi ha un nombre indeterminat de 
+> bits més significatius (els que es troben més a l’esquerra de la 
+> seqüència binària) que sempre prenen el valor 1, mentre que la resta de 
+> bits, els menys significatius (que localitzem a la dreta del conjunt d’uns) 
+> prenen sempre el valor 0.
+
+*Ex1: El rang definit per 128.154.X.X es pot definir fent servir una adreça 
+base com per exemple 128.154.0.0 i una màscara 255.255.0.0*
+
+*Ex2: el rang definit per 144.134.12.X es pot definir fent servir una dreça
+base com per exemple 144.134.12.11 i una màscara 255.255.255.0*
+
+##### Adreces IP especials
+el rang 127.0.0.0 pertany al propi dispositiu
+També hi ah rangs d'adreces reservades a les xarxes locals com 192.168.0.0
+També existeixen les conegudes com adreces *broadcast*, s'identifica per tenir 255
+en una o més posicions.
+*Ex: 248.147.118.255*
+> broadcast: es la transmisión de datos que serán recibidos por todos los 
+> dispositivos en una red.
+
+//TODO: ctl+F
+Finalment farem una menció específica a les adreces anomenades de multidifusió o multicast.
 
