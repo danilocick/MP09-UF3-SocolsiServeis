@@ -156,6 +156,27 @@ en una o més posicions.
 > broadcast: es la transmisión de datos que serán recibidos por todos los 
 > dispositivos en una red.
 
-//TODO: ctl+F
-Finalment farem una menció específica a les adreces anomenades de multidifusió o multicast.
+>multicast: es la administració d'adreces en les que es poden fer subscripcions. 
+> No corresponen a cap dispositiu en concret però están controlades per dispositius intermediaris.
+> L’objectiu d’aquest mecanisme és reduir el trànsit dins d’una xarxa.
+> El mecanisme multicast permet utilitzar un únic paquet durant un tram de la 
+> transmissió per fer arribar la mateixa informació als mateixos dispositius.
 
+Les adreces IP reservades al multicasting són les que es troben compreses entre els 
+valors 224.0.0.0 i 239.255.255.255. Les adreces del rang 224.0.0.x es troben 
+reservades per a tasques de manteniment en àmbits de xarxes d’àrea local. 
+
+##### Noms de domini
+per a l’ús humà les adreces IP dificulten la localització de dispositius, ja 
+que poden ser redundants, costen de memoritzar i en no tenir significat propicien 
+els error involuntaris d’escriptura. 
+
+Els noms de domini tenen la garantia que són únics en tot el món, per això els propietaris 
+poden decidir d’usar-los directament com a nom d’un dispositiu o bé crear subdominis derivats 
+per disposar de més noms. Els subdominis s’aconsegueixen afegint prefixos separats per un punt 
+al nom de domini. Lògicament els prefixos seran també únics per a un domini específic de 
+manera que la concatenació del prefix i el domini acabi donant sempre subdominis únics. 
+
+[subdomini.png](Images/subdominis.png)
+
+##### Servidor DNS
