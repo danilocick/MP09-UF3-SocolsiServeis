@@ -3,6 +3,7 @@ package Ex3;
 import java.io.IOException;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 public class DatagramSocketClient {
     InetAddress serverIP;
@@ -48,21 +49,21 @@ public class DatagramSocketClient {
 
     private byte[] getDataToRequest(byte[] data, int length) {
         //procés diferent per cada aplicació
-        for (int i = 0; i < data.length; i++) {
-            System.out.print(data[i]);
-        }
+        System.out.println(new String(data,0, length));
         return "rebut".getBytes(StandardCharsets.UTF_8);
     }
 
     private byte[] getFirstRequest() {
         //procés diferent per cada aplicació
-        //...
-        return "hola".getBytes(StandardCharsets.UTF_8);
+        Scanner sc = new Scanner(System.in);
+        String st = sc.nextLine();
+
+        return st.getBytes(StandardCharsets.UTF_8);
     }
 
     private boolean mustContinue(byte[] sendingData) {
         //procés diferent per cada aplicació
-        if (sendingData.toString().equals("rebut")){
+        if (sendingData.toString().equals("adios")){
             return false;
         }
         return true;

@@ -50,7 +50,16 @@ public class DatagramSocketServer {
     }
 
     private byte[] processData(byte[] data, int length) {
-        System.out.println(data.toString());
-        return "rebut".getBytes(StandardCharsets.UTF_8);
+        String mssg = new String(data, 0, length);
+
+        System.out.println(mssg);
+
+        if (mssg.equals("huevo")){
+            return "Acertaste hijo de la gran puta, voy a buscar otra".getBytes(StandardCharsets.UTF_8);
+        }else if (mssg.equals("repetir") || mssg.equals("Hola")){
+            return "Vengo de padres cantores, pero yo no soy cantor. Llevo la ropa blanca y amarillo el corazón. ¿Quién soy?".getBytes(StandardCharsets.UTF_8);
+        }else {
+            return "fallaste boludo".getBytes(StandardCharsets.UTF_8);
+        }
     }
 }
