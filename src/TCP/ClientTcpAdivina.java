@@ -1,4 +1,4 @@
-package TCPconexion;
+package TCP;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,28 +11,30 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TcpSocketClient{
+public class ClientTcpAdivina extends Thread {
+    /* CLient TCP que ha endevinar un número pensat per SrvTcpAdivina.java */
     String hostname;
     int port;
     boolean continueConnected;
     int intents;
 
-    public TcpSocketClient(String hostname, int port) {
+    public ClientTcpAdivina(String hostname, int port) {
         this.hostname = hostname;
         this.port = port;
         continueConnected = true;
         intents=0;
     }
 
-    public void connect(String address, int port) {
+    public void run() {
         String serverData;
         String request;
 
         Socket socket;
         BufferedReader in;
         PrintStream out;
+
         try {
-            socket = new Socket(InetAddress.getByName(address), port);
+            socket = new Socket(InetAddress.getByName(hostname), port);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintStream(socket.getOutputStream());
             //el client atén el port fins que decideix finalitzar
@@ -40,23 +42,22 @@ public class TcpSocketClient{
                 serverData = in.readLine();
                 //processament de les dades rebudes i obtenció d'una nova petició
                 request = getRequest(serverData);
-                //enviament de la petició
-                out.println(request);//assegurem que acaba amb un final de línia
-                out.flush(); //assegurem que s'envia
-                //comprovem si la petició és un petició de finalització i en cas
-                //que ho sigui ens preparem per sortir del bucle
-                continueConnected = mustFinish(request);
-            }
+                //enviament el número i els intents
+                out.println(request);
+                out.println(intents);
+                out.flush();
 
+            }
             close(socket);
         } catch (UnknownHostException ex) {
             System.out.println("Error de connexió. No existeix el host: " + ex.getMessage());
         } catch (IOException ex) {
             System.out.println("Error de connexió indefinit: " + ex.getMessage());
         }
+
     }
 
-    private String getRequest(String serverData) {
+    public String getRequest(String serverData) {
         String ret;
         System.out.println(serverData);
         if( serverData.equals("Correcte") ) {
@@ -70,24 +71,20 @@ public class TcpSocketClient{
         }
 
         return ret;
+
     }
 
-    private boolean mustFinish(String request) {
-        if (request.equals("exit")) return false;
+    public boolean mustFinish(String dades) {
+        if (dades.equals("exit")) return false;
         return true;
 
-    }
-
-
-    private void reportError(String s, UnknownHostException ex) {
-        System.out.println(s + " " + ex);
     }
 
     private void close(Socket socket){
         //si falla el tancament no podem fer gaire cosa, només enregistrar
         //el problema
         try {
-        //tancament de tots els recursos
+            //tancament de tots els recursos
             if(socket!=null && !socket.isClosed()){
                 if(!socket.isInputShutdown()){
                     socket.shutdownInput();
@@ -98,14 +95,21 @@ public class TcpSocketClient{
                 socket.close();
             }
         } catch (IOException ex) {
-        //enregistrem l'error amb un objecte Logger
-            Logger.getLogger(TcpSocketClient.class.getName()).log(Level.SEVERE, null, ex);
+            //enregistrem l'error amb un objecte Logger
+            Logger.getLogger(ClientTcpAdivina.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public static void main(String[] args) {
-        TcpSocketClient tcpSocketClient = new TcpSocketClient("localhost",9090);
-        tcpSocketClient.connect(tcpSocketClient.hostname, tcpSocketClient.port);
-    }
+		/*if (args.length != 2) {
+            System.err.println(
+                "Usage: java ClientTcpAdivina <host name> <port number>");
+            System.exit(1);
+        }*/
 
+        // String hostName = args[0];
+        // int portNumber = Integer.parseInt(args[1]);
+        ClientTcpAdivina clientTcp = new ClientTcpAdivina("localhost",5558);
+        clientTcp.start();
+    }
 }
