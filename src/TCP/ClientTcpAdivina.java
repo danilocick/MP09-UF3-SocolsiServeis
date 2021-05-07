@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 public class ClientTcpAdivina extends Thread {
     /* CLient TCP que ha endevinar un número pensat per SrvTcpAdivina.java */
+
     String hostname;
     int port;
     boolean continueConnected;

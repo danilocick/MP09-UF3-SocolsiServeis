@@ -13,14 +13,17 @@ public class ThreadSevidorAdivina implements Runnable {
     BufferedReader in = null;
     PrintStream out = null;
     String msgEntrant, msgSortint;
+    Llista ns;
     boolean acabat;
     int intentsJugador;
 
-    public ThreadSevidorAdivina(Socket clientSocket) throws IOException {
+    public ThreadSevidorAdivina(Socket clientSocket, Llista ns) throws IOException {
         this.clientSocket = clientSocket;
+        this.ns = ns;
         acabat = false;
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         out= new PrintStream(clientSocket.getOutputStream());
+
     }
 
     @Override
@@ -53,7 +56,7 @@ public class ThreadSevidorAdivina implements Runnable {
 
         if(en == null) ret="Benvingut al joc!";
         else {
-            ret = en;
+            ret = ns.(en);
             if(ret.equals("Correcte")) {
                 acabat = true;
             }

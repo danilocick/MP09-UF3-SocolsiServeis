@@ -1,4 +1,4 @@
-package TCPmulticast;
+package UDPmulticast;
 
 public class Velocitat {
 
