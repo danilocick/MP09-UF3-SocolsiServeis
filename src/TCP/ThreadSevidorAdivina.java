@@ -1,29 +1,25 @@
 package TCP;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ThreadSevidorAdivina implements Runnable {
     /* Thread que gestiona la comunicació de SrvTcPAdivina.java i un cllient ClientTcpAdivina.java */
 
     Socket clientSocket = null;
-    BufferedReader in = null;
-    PrintStream out = null;
-    String msgEntrant, msgSortint;
-    Llista ns;
+    ObjectInputStream in;
+    ObjectOutputStream out;
+    List<Integer> msgEntrant, msgSortint;
     boolean acabat;
-    int intentsJugador;
 
-    public ThreadSevidorAdivina(Socket clientSocket, Llista ns) throws IOException {
+    public ThreadSevidorAdivina(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
-        this.ns = ns;
         acabat = false;
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        out= new PrintStream(clientSocket.getOutputStream());
-
+        in = new ObjectInputStream(new ObjectInputStream(clientSocket.getInputStream()));
+        out= new ObjectOutputStream(new ObjectOutputStream(clientSocket.getOutputStream()));
     }
 
     @Override
@@ -33,17 +29,12 @@ public class ThreadSevidorAdivina implements Runnable {
 
                 msgSortint = generaResposta(msgEntrant);
 
-                out.println(msgSortint);
+                out.writeObject(msgSortint);
                 out.flush();
-                msgEntrant = in.readLine();
-                intentsJugador = Integer.parseInt(in.readLine());
-
-
             }
         }catch(IOException e){
             System.out.println(e.getLocalizedMessage());
         }
-        System.out.println(msgEntrant + " - intents: " + intentsJugador);
         try {
             clientSocket.close();
         } catch (IOException e) {
@@ -51,17 +42,11 @@ public class ThreadSevidorAdivina implements Runnable {
         }
     }
 
-    public String generaResposta(String en) {
-        String ret;
-
-        if(en == null) ret="Benvingut al joc!";
-        else {
-            ret = ns.(en);
-            if(ret.equals("Correcte")) {
-                acabat = true;
-            }
-        }
-        return ret;
+    public List<Integer> generaResposta(List<Integer> en) {
+        List<Integer> listaOrdenada;
+        Collections.sort(en);
+        listaOrdenada = en;
+        return listaOrdenada;
     }
 
 }

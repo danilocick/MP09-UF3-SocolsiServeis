@@ -1,8 +1,10 @@
 package TCP;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,11 +16,9 @@ public class SrvTcpAdivina {
      * */
 
     int port;
-    Llista ns;
 
-    public SrvTcpAdivina(int port, List<Integer> m) {
+    public SrvTcpAdivina(int port) {
         this.port = port;
-        ns = new Llista("numero1", m);
     }
 
     public void listen() {
@@ -30,7 +30,7 @@ public class SrvTcpAdivina {
             while(true) { //esperar connexió del client i llançar thread
                 clientSocket = serverSocket.accept();
                 //Llançar Thread per establir la comunicació
-                ThreadSevidorAdivina FilServidor = new ThreadSevidorAdivina(clientSocket, ns);
+                ThreadSevidorAdivina FilServidor = new ThreadSevidorAdivina(clientSocket);
                 Thread client = new Thread(FilServidor);
                 client.start();
             }
@@ -40,16 +40,7 @@ public class SrvTcpAdivina {
     }
 
     public static void main(String[] args) {
-		/*if (args.length != 1) {
-            System.err.println("Usage: java SrvTcpAdivina <port number>");
-            System.exit(1);
-        }*/
-
-
-        //int port = Integer.parseInt(args[0]);
-        SrvTcpAdivina srv = new SrvTcpAdivina(5558,);
+        SrvTcpAdivina srv = new SrvTcpAdivina(5558);
         srv.listen();
-
     }
-
 }
