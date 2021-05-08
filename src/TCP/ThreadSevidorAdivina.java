@@ -18,8 +18,8 @@ public class ThreadSevidorAdivina implements Runnable {
     public ThreadSevidorAdivina(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
         acabat = false;
-        in = new ObjectInputStream(new ObjectInputStream(clientSocket.getInputStream()));
-        out= new ObjectOutputStream(new ObjectOutputStream(clientSocket.getOutputStream()));
+        in = new ObjectInputStream(clientSocket.getInputStream());
+        out= new ObjectOutputStream(clientSocket.getOutputStream());
     }
 
     @Override

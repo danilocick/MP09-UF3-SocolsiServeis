@@ -83,7 +83,7 @@ public class ClientTcpAdivina extends Thread {
     }
 
     public static void main(String[] args) {
-	   List<Integer> m = new ArrayList<Integer>();
+	   List<Integer> m = new ArrayList<>();
         m.add(0);
         m.add(1);
         m.add(18);
