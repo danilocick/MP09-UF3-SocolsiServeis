@@ -16,7 +16,7 @@ El protocol IP és tan simple que no contempla cap procés de
 control per verificar que la informació arriba realment al seu 
 destí de forma complerta. És per això que la majoria de serveis 
 i aplicacions d’Internet afegeixen un protocol extra de control 
-anomenat TCP.
+anomenat Exercicis_TCP_UCP_multicast.Exercici_TCP.
 
 ### 1.2.1.Arquitectura d'internet
 >Els **processos d’una comunicació** són aquells que permeten als 
@@ -26,8 +26,8 @@ anomenat TCP.
 [MODEL OSI](Images/OSI.png)
 
 Els protocols de control poden ser a internet (prinicipalment) 
-TCP o UDP.
-- TCP: és un protocol molt més sofisticat que gestiona el control 
+Exercicis_TCP_UCP_multicast.Exercici_TCP o UDP.
+- Exercicis_TCP_UCP_multicast.Exercici_TCP: és un protocol molt més sofisticat que gestiona el control 
   de l’ordre i també la pèrdua de paquets a més de la integritat 
   de la informació.
 - UDP:és un protocol de control força senzill, només controla 
@@ -55,11 +55,11 @@ reconèixer quina és l’aplicació destinatària de la informació
 ja que, per descomptat, podria donar-se el cas de tenir diverses 
 aplicacions independents esperant dades.
 Aquest programa s'indentifica amb el seu propi port.
->Els principals protocols usats en aquest nivell són UDP i TCP.
+>Els principals protocols usats en aquest nivell són UDP i Exercicis_TCP_UCP_multicast.Exercici_TCP.
 
 S’utilitzen **2 bytes** per identificar el **port**. Això significa 
 que hi ha 65.535 ports disponibles en cada dispositiu.
-[PRINCIPALES PUERTOS TCP/UDP](https://www.redeszone.net/tutoriales/configuracion-puertos/puertos-tcp-udp/)
+[PRINCIPALES PUERTOS Exercicis_TCP_UCP_multicast.Exercici_TCP/UDP](https://www.redeszone.net/tutoriales/configuracion-puertos/puertos-tcp-udp/)
 - Entre 1 i 1.023: es reserven per aplicacions específiques i estàndards (FTP, HTTP, SSH).
 - Entre 1.024 i 49.151: cal destinar-los a serveis no estàndards.
 - Entre 49.152 i el 65.535: es destinen a comunicacions temporals dels clients 
@@ -81,34 +81,34 @@ bits, s’elimina el bit més significatiu (el de més a l’esquerra)
 per tal d’ajustar sempre la mida a 16 bits i s’incrementa el valor 
 en una unitat. 
 
-#### Protocol TCP
+#### Protocol Exercicis_TCP_UCP_multicast.Exercici_TCP
 Les aplicacions que necessitin fiabilitat en les transmissions 
-hauran de fer servir el protocol TCP. Es tracta d’un protocol 
+hauran de fer servir el protocol Exercicis_TCP_UCP_multicast.Exercici_TCP. Es tracta d’un protocol 
 de gran complexitat amb el qual es garanteix que totes les dades 
 enviades des de l’origen, arriben al destí íntegrament i en el mateix 
 ordre en què han sortit de l’emissor. 
 
->Es diu que el protocol TCP està orientat a la
+>Es diu que el protocol Exercicis_TCP_UCP_multicast.Exercici_TCP està orientat a la
 > connexió perquè manté un diàleg permanent entre l’emissor i el receptor. 
 > En canvi el protocol UDP no està orientat a la connexió perquè un cop 
 > enviades les dades l’emissor es desentén de la transmissió.
 
-TCP és un protocol pensat per comunicar només dos interlocutors. 
+Exercicis_TCP_UCP_multicast.Exercici_TCP és un protocol pensat per comunicar només dos interlocutors. 
 Les aplicacions que necessitin transmetre a múltiples dispositius 
 hauran d’escollir entre aplicar el protocol UDP, amb el risc de pèrdua
 d’informació que això suposa, o bé implementar múltiples connexions dos 
-a dos amb les quals poder controlar a través de TCP la transmissió. 
+a dos amb les quals poder controlar a través de Exercicis_TCP_UCP_multicast.Exercici_TCP la transmissió. 
 
 Per aconseguir la connexió caldrà establir un petit diàleg entre 
 ambdós dispositius en el qual un d’ells enviarà un senyal específic 
 anomenat **PETICIÓ**, que comportarà la reserva d'un port per comunicar-se.
 
-Diem que TCP és un protocol **full-duplex** perquè estableix dos canals de 
+Diem que Exercicis_TCP_UCP_multicast.Exercici_TCP és un protocol **full-duplex** perquè estableix dos canals de 
 comunicació en cada connexió, cada un en un sentit diferent. també els 
 canals de la connexió estan orientats a fluxos (*streaming-oriented*) 
 utilitzat per determinar i controlar l'ordre del traspass. Sovint les 
 limitacions de la xarxa impedeixen enviar les dades en un únic bloc. 
-En aquests casos el protocol TCP permet dividir els enviaments en 
+En aquests casos el protocol Exercicis_TCP_UCP_multicast.Exercici_TCP permet dividir els enviaments en 
 segments més petits en els quals cada un d’ells contindrà parcialment 
 les dades a enviar.
 
@@ -116,7 +116,7 @@ Per tal d’assegurar la fiabilitat de les dades, el protocol estableix
 que per cada segment enviat des d’un o altre dispositiu, el receptor 
 contestarà amb un senyal especial de reconeixement que indiqui a l’emissor 
 que les dades del segment han arribat amb èxit.
-[Esquema del TCP](Images/DataTCP.png)
+[Esquema del Exercicis_TCP_UCP_multicast.Exercici_TCP](Images/DataTCP.png)
 
 ##### Adreça IP
 >**Adreces IP** identifiquen les connexions directes d'un dispositiu de manera única.

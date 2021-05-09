@@ -1,11 +1,8 @@
-package TCP;
+package Exercicis_TCP_UCP_multicast.Exercici_TCP;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

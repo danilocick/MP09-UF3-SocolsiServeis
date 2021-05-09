@@ -1,7 +1,6 @@
-package TCP;
+package Exercicis_TCP_UCP_multicast.Exercici_TCP;
 
 import java.io.IOException;
-import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
@@ -18,13 +17,11 @@ public class ClientTcpAdivina extends Thread {
     String hostname;
     int port;
     boolean continueConnected;
-    List<Integer> lista;
 
-    public ClientTcpAdivina(String hostname, int port, List<Integer> m) {
+    public ClientTcpAdivina(String hostname, int port) {
         this.hostname = hostname;
         this.port = port;
         continueConnected = true;
-        lista = m;
     }
 
     public void run() {
@@ -36,19 +33,26 @@ public class ClientTcpAdivina extends Thread {
 
         try {
             socket = new Socket(InetAddress.getByName(hostname), port);
-            in = new ObjectInputStream(new ObjectInputStream(socket.getInputStream()));
-            out = new ObjectOutputStream(new ObjectOutputStream(socket.getOutputStream()));
+            in = new ObjectInputStream(socket.getInputStream());
+            out = new ObjectOutputStream(socket.getOutputStream());
             //el client atén el port fins que decideix finalitzar
             while(continueConnected){
+                List<Integer> integerList = new ArrayList<>();
+                integerList.add(0);
+                integerList.add(1);
+                integerList.add(18);
+                integerList.add(5);
+                integerList.add(3);
+                integerList.add(9);
+
                 //enviament el número i els intents
-                out.writeObject(lista);
+                out.writeObject(integerList);
                 out.flush();
 
                 //processament de les dades rebudes i obtenció d'una nova petició
                 serverData = (List<Integer>) in.readObject();
                 getRequest(serverData);
             }
-
             close(socket);
 
         } catch (UnknownHostException ex) {
@@ -83,15 +87,9 @@ public class ClientTcpAdivina extends Thread {
     }
 
     public static void main(String[] args) {
-	   List<Integer> m = new ArrayList<>();
-        m.add(0);
-        m.add(1);
-        m.add(18);
-        m.add(5);
-        m.add(3);
-        m.add(9);
 
-        ClientTcpAdivina clientTcp = new ClientTcpAdivina("localhost",5558, m);
+
+        ClientTcpAdivina clientTcp = new ClientTcpAdivina("localhost",5558);
         clientTcp.start();
     }
 }

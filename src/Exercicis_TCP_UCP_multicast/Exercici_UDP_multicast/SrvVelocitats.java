@@ -1,4 +1,4 @@
-package UDPmulticast;
+package Exercicis_TCP_UCP_multicast.Exercici_UDP_multicast;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

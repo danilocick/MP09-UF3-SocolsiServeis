@@ -1,8 +1,7 @@
-package TCP;
+package Exercicis_TCP_UCP_multicast.Exercici_TCP;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,21 +17,22 @@ public class ThreadSevidorAdivina implements Runnable {
     public ThreadSevidorAdivina(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
         acabat = false;
-        in = new ObjectInputStream(clientSocket.getInputStream());
         out= new ObjectOutputStream(clientSocket.getOutputStream());
+        in = new ObjectInputStream(clientSocket.getInputStream());
     }
 
     @Override
     public void run() {
         try {
             while(!acabat) {
+                msgEntrant = (List<Integer>) in.readObject();
 
                 msgSortint = generaResposta(msgEntrant);
 
                 out.writeObject(msgSortint);
                 out.flush();
             }
-        }catch(IOException e){
+        }catch(IOException | ClassNotFoundException e){
             System.out.println(e.getLocalizedMessage());
         }
         try {

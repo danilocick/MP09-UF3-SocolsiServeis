@@ -1,4 +1,4 @@
-package TCP;
+package Exercicis_TCP_UCP_multicast.Exercici_TCP;
 
 import java.io.Serializable;
 import java.util.List;
